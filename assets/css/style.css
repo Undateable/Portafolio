@@ -1178,13 +1178,117 @@ section {
   background-color: rgba(138, 96, 59, 0.73);
   color: whitesmoke;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 .projects-section .heading {
   font-size: 8rem;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   position: relative;
   color: var(--text-color);
+}
+
+.gameboy-dpad {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 2rem auto;
+  background: #20190F;
+  border-radius: 50%;
+  padding: 15px;
+  border: 2px solid var(--main-color);
+  box-shadow: 0 0 20px rgba(243, 228, 203, 0.3);
+  display: grid;
+  grid-template-areas: 
+    ". up ."
+    "left center right"
+    ". down .";
+  gap: 5px;
+  z-index: 2;
+}
+
+.gameboy-dpad button {
+  width: 40px;
+  height: 40px;
+  background: var(--text-color);
+  border: none;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.gameboy-dpad button i {
+  font-size: 2rem;
+  color: #20190F;
+  transition: all 0.3s ease;
+}
+
+.gameboy-dpad .btn-up {
+  grid-area: up;
+  justify-self: center;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.gameboy-dpad .btn-right {
+  grid-area: right;
+  justify-self: end;
+  align-self: center;
+  clip-path: polygon(0% 0%, 0% 100%, 100% 50%);
+}
+
+.gameboy-dpad .btn-down {
+  grid-area: down;
+  justify-self: center;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+}
+
+.gameboy-dpad .btn-left {
+  grid-area: left;
+  justify-self: start;
+  align-self: center;
+  clip-path: polygon(100% 0%, 100% 100%, 0% 50%);
+}
+
+.gameboy-dpad button:hover {
+  background-color: var(--main-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--main-color);
+}
+
+.gameboy-dpad button:active {
+  transform: scale(0.95);
+  background-color: #e3d4bb;
+}
+
+.gameboy-dpad .dpad-center {
+  grid-area: center;
+  width: 20px;
+  height: 20px;
+  background: var(--text-color);
+  border-radius: 50%;
+  justify-self: center;
+  align-self: center;
+  pointer-events: none;
+}
+  width: 120px;
+  height: 120px;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 10;
+  background: #20190F;
+  border-radius: 50%;
+  padding: 10px;
+  border: 2px solid var(--main-color);
+  box-shadow: 0 0 15px rgba(243, 228, 203, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .projects-section .heading span {
@@ -1210,6 +1314,94 @@ section {
   transform-origin: left;
 }
 
+.gameboy-dpad {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 2rem auto 4rem;
+  background: #20190F;
+  border-radius: 50%;
+  padding: 15px;
+  border: 2px solid var(--main-color);
+  box-shadow: 0 0 20px rgba(243, 228, 203, 0.3);
+  display: grid;
+  grid-template-areas: 
+    ". up ."
+    "left center right"
+    ". down .";
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 1fr auto 1fr;
+  gap: 5px;
+  z-index: 2;
+}
+
+.gameboy-dpad button {
+  width: 40px;
+  height: 40px;
+  background: var(--text-color);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.gameboy-dpad button i {
+  font-size: 2rem;
+  color: #20190F;
+  transition: all 0.3s ease;
+}
+
+.gameboy-dpad .btn-up {
+  grid-area: up;
+  justify-self: center;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.gameboy-dpad .btn-right {
+  grid-area: right;
+  justify-self: end;
+  align-self: center;
+  clip-path: polygon(0% 0%, 0% 100%, 100% 50%);
+}
+
+.gameboy-dpad .btn-down {
+  grid-area: down;
+  justify-self: center;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+}
+
+.gameboy-dpad .btn-left {
+  grid-area: left;
+  justify-self: start;
+  align-self: center;
+  clip-path: polygon(100% 0%, 100% 100%, 0% 50%);
+}
+
+.gameboy-dpad button:hover {
+  background-color: var(--main-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--main-color);
+}
+
+.gameboy-dpad button:active {
+  transform: scale(0.95);
+  background-color: #e3d4bb;
+}
+
+.gameboy-dpad .dpad-center {
+  grid-area: center;
+  width: 20px;
+  height: 20px;
+  background: var(--text-color);
+  border-radius: 50%;
+  justify-self: center;
+  align-self: center;
+  pointer-events: none;
+}
+
 .slider-container {
   position: relative;
   width: 90%;
@@ -1220,10 +1412,30 @@ section {
   background: rgba(146, 104, 68, 0.95);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   padding: 2rem;
-  min-height: 400px; /* Altura mínima para asegurar visibilidad */
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gameboy-dpad {
+  width: 120px;
+  height: 120px;
+  margin: 2rem auto;
+  position: relative;
+  z-index: 10;
+  background: #20190F;
+  border-radius: 50%;
+  padding: 10px;
+  border: 2px solid var(--main-color);
+  box-shadow: 0 0 15px rgba(243, 228, 203, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slider {
+  width: 100%;
   display: flex;
   transition: transform 0.5s ease-in-out;
 }
@@ -1259,40 +1471,133 @@ section {
   transition: transform 0.2s ease-in-out;
 }
 
-.nav {
-  width: 60px;
-  height: 60px;
+.gameboy-dpad {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 95%;
+  left: -60px;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: #20190F;
   border-radius: 50%;
-  background-color: var(--main-color);
-  color: #20190F;
-  font-size: 32px;
+  padding: 10px;
+  border: 2px solid var(--main-color);
+  box-shadow: 0 0 15px rgba(243, 228, 203, 0.2);
+}
+
+.dpad-center {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--main-color);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.nav {
+  width: 40px;
+  height: 40px;
+  background-color: #2a2a2a;
+  color: var(--main-color);
   border: none;
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 10;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.nav.prev {
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.nav.next {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.nav i {
+  font-size: 2rem;
+  transition: all 0.15s ease;
+}
+
+.nav .tooltip {
+  position: absolute;
+  background: var(--main-color);
+  color: #20190F;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.nav.prev .tooltip {
+  right: calc(100% + 10px);
+  transform: translateY(-50%);
+}
+
+.nav.next .tooltip {
+  left: calc(100% + 10px);
+  transform: translateY(-50%);
 }
 
 .nav:hover {
-  background-color: #20190F;
-  color: var(--main-color);
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 0 25px var(--main-color);
+  background-color: #3a3a3a;
+}
+
+.nav:active {
+  transform: translateY(-50%) scale(0.95);
+  background-color: var(--main-color);
+  color: #20190F;
+}
+
+.nav:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gameboy-dpad::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(45deg, var(--main-color), transparent);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.gameboy-dpad:hover::before {
+  opacity: 0.5;
+}
+
+.gameboy-dpad {
+  right: -60px;  /* Cambiado de left a right para el botón next */
 }
 
 .prev {
-  left: -30px;
+  left: 10px;
   padding-right: 5px;
 }
 
 .next {
-  right: -30px;
+  right: 10px;
   padding-left: 5px;
 }
 
