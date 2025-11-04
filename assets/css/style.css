@@ -227,9 +227,10 @@ section {
   content: '';
   position: absolute;
   top: 0;
-  width: 200px;
+  width: 15%;
   height: 100%;
   z-index: 2;
+  pointer-events: none;
 }
 
 .tech-carousel-section::before {
@@ -245,15 +246,20 @@ section {
 .carousel {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
   padding: 2rem 0;
+  position: relative;
+  width: 100%;
 }
 
 .logos {
   display: flex;
-  gap: 6rem;
-  animation: scroll 40s linear infinite;
+  gap: 4rem;
+  animation: scroll 0.5s linear infinite;
+  padding: 2rem 0;
+  will-change: transform;
+  width: max-content;
 }
 
 .logos:hover {
@@ -264,41 +270,109 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   background: rgba(243, 228, 203, 0.1);
-  transition: all 0.3s ease;
-  min-width: 120px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 140px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(243, 228, 203, 0.1);
+}
+
+.tech-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(243, 228, 203, 0.2),
+    transparent
+  );
+  transition: 0.5s;
 }
 
 .tech-icon i {
   font-size: 4rem;
   color: var(--main-color);
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 0 8px rgba(243, 228, 203, 0.3));
 }
 
 .tech-icon span {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: var(--text-color);
   opacity: 0.9;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  text-align: center;
+  font-weight: 500;
 }
 
 .tech-icon:hover {
-  transform: translateY(-10px);
-  background: rgba(243, 228, 203, 0.2);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px) scale(1.05);
+  background: rgba(243, 228, 203, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-color: rgba(243, 228, 203, 0.3);
+}
+
+.tech-icon:hover::before {
+  left: 100%;
 }
 
 .tech-icon:hover i {
   color: #ffffff;
-  transform: scale(1.1);
+  transform: scale(1.2) rotate(360deg);
+  filter: drop-shadow(0 0 12px rgba(243, 228, 203, 0.5));
 }
 
 .tech-icon:hover span {
   opacity: 1;
   color: var(--main-color);
+  transform: scale(1.1);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Ensure smooth animation */
+@media (prefers-reduced-motion: no-preference) {
+  .logos {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tech-icon {
+    min-width: 120px;
+    padding: 1.5rem;
+  }
+
+  .tech-icon i {
+    font-size: 3rem;
+  }
+
+  .tech-icon span {
+    font-size: 1.4rem;
+  }
+
+  .logos {
+    gap: 2rem;
+  }
 }
 
 @keyframes scroll {
@@ -1090,13 +1164,63 @@ section {
   line-height: 1.6;
 }
 
+.projects-section {
+  background-color: rgba(138, 96, 59, 0.73);
+  padding: 4rem 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.projects-section {
+  padding: 10rem 12%;
+  background-color: rgba(138, 96, 59, 0.73);
+  color: whitesmoke;
+  text-align: center;
+}
+
+.projects-section .heading {
+  font-size: 8rem;
+  margin-bottom: 5rem;
+  position: relative;
+  color: var(--text-color);
+}
+
+.projects-section .heading span {
+  color: var(--main-color);
+  position: relative;
+}
+
+.projects-section .heading span::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--main-color);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.projects-section .heading:hover span::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .slider-container {
   position: relative;
-  max-width: 1000px;
-  margin: auto;
-  overflow: hidden;
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  overflow: visible;
   border-radius: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background: rgba(146, 104, 68, 0.95);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  min-height: 400px; /* Altura mínima para asegurar visibilidad */
 }
 
 .slider {
@@ -1139,32 +1263,45 @@ section {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #754a25;
-  color: rgb(255, 255, 255);
+  background-color: var(--main-color);
+  color: #20190F;
   font-size: 32px;
   border: none;
   cursor: pointer;
   position: absolute;
-  top: 92%;
+  top: 50%;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .nav:hover {
-  background-color: rgba(142, 19, 214, 0.8);
+  background-color: #20190F;
+  color: var(--main-color);
   transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 25px var(--main-color);
 }
 
 .prev {
-  left: 20px;
+  left: -30px;
+  padding-right: 5px;
 }
 
 .next {
-  right: 20px;
+  right: -30px;
+  padding-left: 5px;
+}
+
+@media (max-width: 768px) {
+  .prev { left: 10px; }
+  .next { right: 10px; }
+  .projects-section .heading {
+    font-size: 5rem;
+  }
 }
 
 .heading {
@@ -1238,7 +1375,7 @@ section {
   .logos {
     display: flex;
     column-gap: var(--carousel-gap);
-    animation: scroll var(--carousel-speed) linear infinite;
+    animation: scroll 120s linear infinite;
     will-change: transform;
 
     img {
@@ -1356,47 +1493,86 @@ section {
 }
 
 /*Image hovering*/
+.slide {
+  width: 100%;
+  padding: 2rem;
+}
+
+.video-section {
+  margin-bottom: 3rem;
+}
+
+.video-section video {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+}
+
+.video-section b {
+  font-size: 3rem;
+  color: var(--main-color);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.video-section pre {
+  font-size: 1.8rem;
+  color: var(--text-color);
+  margin: 1rem 0;
+  font-family: 'Calibri', sans-serif;
+  line-height: 1.6;
+}
+
+.video-section p {
+  font-size: 2rem;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.images-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
 .images-section img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.2s;
-  max-width: 100%;
-  height: auto;
-  margin: 10px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 3px solid transparent;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  filter: brightness(0.9);
 }
 
 .images-section img:hover {
-  transform: scale(1.1);
+  transform: scale(1.8) translateY(-20px);
+  border-color: var(--main-color);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  filter: brightness(1.1);
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  padding-top: 60px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.9);
+@media (max-width: 768px) {
+  .images-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .images-section img:hover {
+    transform: scale(1.5) translateY(-10px);
+  }
 }
 
-.modal-content {
-  margin: auto;
-  display: block;
-  max-width: 90%;
-  max-height: 90vh;
-  box-shadow: 0 0 20px black;
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 35px;
-  color: white;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
+@media (max-width: 480px) {
+  .images-section {
+    grid-template-columns: 1fr;
+  }
 }
 
 .mywork-section {
@@ -1596,10 +1772,30 @@ section {
 .skills-section .heading {
   font-size: 8rem;
   margin-bottom: 5rem;
+  position: relative;
 }
 
 .skills-section .heading span {
   color: var(--main-color);
+  position: relative;
+}
+
+.skills-section .heading span::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--main-color);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.skills-section .heading:hover span::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .skills-container {

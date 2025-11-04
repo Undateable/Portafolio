@@ -63,74 +63,75 @@ const projects = [
 // =======================
 // Slider logic
 // =======================
-let currentIndex = 0;
-const slider = document.getElementById("slider");
+document.addEventListener('DOMContentLoaded', function() {
+    let currentIndex = 0;
+    const slider = document.getElementById("slider");
+    
+    if (!slider) {
+        console.error('Slider element not found!');
+        return;
+    }
 
-function renderSlide() {
-    const p = projects[currentIndex];
+    function renderSlide() {
+        const p = projects[currentIndex];
+        console.log('Rendering slide:', currentIndex);
 
-    slider.innerHTML = `
-    <div class="slide">
-      <div class="video-section">
-        <video controls autoplay muted>
-          <source src="${p.videoSrc}" type="video/mp4" />
-          Tu navegador no soporta video.
-        </video>
-        <b>${p.title}</b>
-        <pre>
+        slider.innerHTML = `
+        <div class="slide">
+            <div class="video-section">
+                <video controls autoplay muted>
+                    <source src="${p.videoSrc}" type="video/mp4" />
+                    Tu navegador no soporta video.
+                </video>
+                <b>${p.title}</b>
+                <pre>
 Genre: ${p.genre}
 Engine: ${p.engine}
 Role: ${p.role}
-        </pre>
-        <p>${p.description}</p>
-      </div>
+                </pre>
+                <p>${p.description}</p>
+            </div>
 
-      <div class="images-section">
-        ${p.images
-            .map(
-                (imgSrc, idx) =>
-                    `<img src="${imgSrc}" class="expandable" data-img="${imgSrc}" alt="Imagen ${idx + 1}" />`
-            )
-            .join("")}
-      </div>
-    </div>
-  `;
+            <div class="images-section">
+                ${p.images
+                    .map(
+                        (imgSrc, idx) =>
+                            `<img src="${imgSrc}" alt="Screenshot ${idx + 1} of ${p.title}" loading="lazy" />`
+                    )
+                    .join("")}
+            </div>
+        </div>
+        `;
+    }
 
-    document.querySelectorAll(".expandable").forEach((img) => {
-        img.addEventListener("click", () => openModal(img.dataset.img));
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+            currentIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
+            renderSlide();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+            currentIndex = currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
+            renderSlide();
+        });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && prevBtn) {
+            prevBtn.click();
+        } else if (e.key === 'ArrowRight' && nextBtn) {
+            nextBtn.click();
+        }
     });
-}
 
-document.getElementById("prevBtn").addEventListener("click", () => {
-    currentIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
+    // Initialize first slide
+    console.log('Initializing first slide');
     renderSlide();
 });
-
-document.getElementById("nextBtn").addEventListener("click", () => {
-    currentIndex = currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
-    renderSlide();
-});
-
-// =======================
-// Modal logic
-// =======================
-const modal = document.getElementById("imageModal");
-const modalImg = document.getElementById("modalImage");
-const modalClose = document.getElementById("modalClose");
-
-function openModal(imgSrc) {
-    modal.style.display = "block";
-    modalImg.src = imgSrc;
-}
-
-modalClose.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-// close modal when clicking outside img
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) modal.style.display = "none";
-});
-
-renderSlide(); // inicializar
 
