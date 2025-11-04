@@ -1,0 +1,62 @@
+:root {
+  /* Colors */
+  --color-primary: #8a603b;
+  --color-primary-light: #926844;
+  --color-primary-dark: #754a25;
+  --color-accent: #f3e4cb;
+  --color-text: #ffffff;
+  --color-text-dark: #000000;
+  --color-background: #f3e4cb;
+  
+  /* Typography */
+  --font-primary: 'Calibri', sans-serif;
+  --font-display: 'Limelight', sans-serif;
+  --font-size-base: 1.6rem;
+  --font-size-h1: 7rem;
+  --font-size-h2: 4.6rem;
+  --font-size-h3: 2.6rem;
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+  
+  /* Animations */
+  --transition-fast: 0.3s ease;
+  --transition-medium: 0.5s ease-in-out;
+  
+  /* Layout */
+  --header-height: 8rem;
+  --container-padding: 12%;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 50%;
+  
+  /* Effects */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Carousel */
+  --carousel-speed: 15s;
+  --carousel-gap: 4rem;
+  --carousel-padding: 3.75rem;
+  --logo-width: 15rem;
+  --gradient-width: 15%;
+  
+  /* Z-index */
+  --z-header: 100;
+  --z-modal: 1000;
+}
+
+/* Dark mode variables - for future implementation */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #20190F;
+    --color-text: #f3e4cb;
+    --color-text-dark: #ffffff;
+  }
+}
