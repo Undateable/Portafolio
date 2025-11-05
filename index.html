@@ -9,12 +9,39 @@
     <meta name="keywords" content="Game Design, Narrative Design, Unreal Engine, Unity, Game Development, Portfolio">
     <meta name="author" content="Dante Pentito">
 
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+        font-src 'self' https://fonts.gstatic.com https://unpkg.com;
+        img-src 'self' data: blob: https://unpkg.com;
+        media-src 'self';
+        connect-src 'self';
+        frame-src 'none';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+
     <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Dante Pentito - Game Designer Portfolio">
+    <meta property="og:description"
+        content="Game and Narrative Designer with experience in Unreal Engine and Unity. View my latest projects and skills.">
     <meta property="og:title" content="Dante Pentito - Portfolio">
     <meta property="og:description"
         content="Game and Narrative Designer with experience in Unreal Engine and Unity. View my latest projects and skills.">
     <meta property="og:image" content="assets/img/logodp.png">
     <meta property="og:url" content="https://yourwebsite.com">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href="assets/img/logodp.png">
+    <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" crossorigin>
 
     <!-- Favicon -->
     <link rel="icon" href="./assets/img/logodp.png" type="image/png">
@@ -25,10 +52,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' integrity="sha384-..." crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
 
     <title>Dante Pentito - Game & Narrative Designer</title>
+
+</head>
 
 <body>
 
@@ -80,7 +109,7 @@
                     Seeking to contribute creativity and technical analysis to innovative game development.
                 </p>
             </div>
-            
+
             <div class="social-icons-wrapper">
                 <a href="https://www.linkedin.com/in/dpentito/" target="_blank" rel="noopener noreferrer"
                     aria-label="Visit my LinkedIn profile" class="social-link linkedin">
@@ -113,9 +142,8 @@
 
         <div class="home-img">
             <div class="img-wrapper">
-                <img src="assets/img/image.jpg" alt="Dante Pentito - Game Designer"
-                    onerror="this.onerror=null; console.log('Error loading image'); this.style.border='2px solid red';"
-                    style="max-width: 100%; display: block;">
+                <img src="assets/img/image.jpg" alt="Dante Pentito - Game Designer" 
+                     id="profile-image" class="profile-img">
                 <div class="img-overlay"></div>
                 <!-- Decorative elements -->
                 <div class="img-frame"></div>
@@ -128,24 +156,6 @@
                 <span class="years">3+</span>
                 <span class="text">Years of<br>Experience</span>
             </div>
-        </div>
-    </section>
-
-    <section id="projects" class="projects-section">
-        <h2 class="heading">
-            My <span>Projects</span>
-        </h2>
-        <div class="gameboy-dpad">
-            <button class="btn-left" id="prevBtn" aria-label="Previous project">
-                <i class='bx bx-chevron-left'></i>
-            </button>
-            <button class="btn-right" id="nextBtn" aria-label="Next project">
-                <i class='bx bx-chevron-right'></i>
-            </button>
-            <div class="dpad-center"></div>
-        </div>
-        <div class="slider-container">
-            <div class="slider" id="slider"></div>
         </div>
     </section>
 
@@ -263,6 +273,23 @@
         </div>
     </section>
 
+    <section id="projects" class="projects-section">
+        <h2 class="heading">
+            My <span>Projects</span>
+        </h2>
+        <div class="gameboy-dpad">
+            <button class="btn-left" id="prevBtn" aria-label="Previous project">
+                <i class='bx bx-chevron-left'></i>
+            </button>
+            <button class="btn-right" id="nextBtn" aria-label="Next project">
+                <i class='bx bx-chevron-right'></i>
+            </button>
+            <div class="dpad-center"></div>
+        </div>
+        <div class="slider-container">
+            <div class="slider" id="slider"></div>
+        </div>
+    </section>
 
     <section class="mywork-section" id="mywork">
         <h2 class="heading">
@@ -317,10 +344,10 @@
                 </div>
                 <h3>RDS - Game, narrative and Level Design</h3>
                 <p class="mywork-description">All my work for the project "Ruinas de Skersher"</p>
-                <a class="work-link" href="https://drive.google.com/drive/folders/1jg_RTV5Gp-Su4jTKshvbrog_kHzimc7j?usp=sharing" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   aria-label="All my work for the project 'Ruinas de Skersher'">
+                <a class="work-link"
+                    href="https://drive.google.com/drive/folders/1jg_RTV5Gp-Su4jTKshvbrog_kHzimc7j?usp=sharing"
+                    target="_blank" rel="noopener noreferrer"
+                    aria-label="All my work for the project Ruinas de Skersher">
                     <span>View Document</span>
                     <i class='bx bx-right-arrow-alt'></i>
                 </a>
@@ -443,32 +470,12 @@
         </div>
     </footer>
 
-
-
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/projects.js"></script>
     <script src="assets/js/imageDebug.js"></script>
-
-    <!-- Preload critical assets -->
-    <link rel="preload" as="image" href="assets/img/logodp.png">
-    <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" crossorigin>
-
-    <!-- Add Schema.org data for better SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "Person",
-        "name": "Dante Pentito",
-        "jobTitle": "Game and Narrative Designer",
-        "url": "https://yourwebsite.com",
-        "sameAs": [
-            "https://www.linkedin.com/in/dpentito/",
-            "https://github.com/Undateable",
-            "https://dannette.itch.io/"
-        ]
-    }
-    </script>
+    <!-- Mover el JSON-LD inline a archivo externo -->
+    <script src="assets/js/schema.js"></script>
 </body>
 
 </html>

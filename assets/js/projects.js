@@ -3,6 +3,19 @@
 // =======================
 const projects = [
     {
+        title: "🧟‍♀️ ​Ruinas de Skersher ",
+        /* videoSrc: "assets/video/transformicevdo.mp4", */
+        genre: "Acción y Puzzles narrativos.",
+        engine: "Unity / Google Drive.",
+        role: "I served as the Game, Narrative and Level Designer.",
+        description:"I was responsible for the full narrative, core gameplay systems, and level design of the project, all developed from scratch, while also coordinating with the art team to ensure consistent visual direction and smooth cross-team communication.",
+        images: [
+            "assets/img/ruinas_1.png",
+            "assets/img/ruinas_2.png",
+            "assets/img/ruinas_3.png",
+        ],
+    },
+    {
         title: "🏃 Gaucho Runner",
         videoSrc: "assets/video/gauchrun.mp4",
         genre: "Endless Runner, FPS.",
@@ -56,20 +69,6 @@ const projects = [
             "assets/img/transformice1.png",
             "assets/img/transformice2.png",
             "assets/img/transformice3.png",
-        ],
-    },
-    {
-        title: " Ruinas de Skersher ",
-        /* videoSrc: "assets/video/transformicevdo.mp4", */
-        genre: "acción y puzzles narrativos.",
-        engine: "Construct 2.",
-        role: "Designer, Artist and Developer.",
-        description:
-            "Designed the mechanics, levels and art approach.",
-        images: [
-            "assets/img/ruinas_1.png",
-            "assets/img/ruinas_2.png",
-            "assets/img/ruinas_3.png",
         ],
     },
 ];
