@@ -1,88 +1,95 @@
-import { Navigation } from './navigation.js';
-import { ProjectSlider } from './projectSlider.js';
-import { projects } from './data/projects.js';
-import { TypeWriter } from './typeWriter.js';
+// ========== TYPED TEXT ANIMATION ==========
+document.addEventListener('DOMContentLoaded', function() {
+    const typedTextSpan = document.querySelector('.typed-text');
+    const cursorSpan = document.querySelector('.cursor');
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize navigation
-    const navigation = new Navigation();
-    
-    // Initialize project slider
-    const slider = new ProjectSlider(projects);
-    
-    // Initialize TypeWriter
-    const typeWriter = new TypeWriter(
-        document.querySelector('.typed-text'),
-        [
-            'Game Designer',
-            'Narrative Designer',
-            'Level Designer',
-            'UI/UX Designer',
-            'Creative Developer'
-        ],
-        3000
-    );
-    
-    // Inicializar efectos de desplazamiento
-    const scrollElements = document.querySelectorAll('.scroll-fade');
-    
-    const elementInView = (el, percentageScroll = 100) => {
-        const elementTop = el.getBoundingClientRect().top;
-        return (
-            elementTop <= 
-            ((window.innerHeight || document.documentElement.clientHeight) * (percentageScroll/100))
-        );
-    };
-    
-    const displayScrollElement = (element) => {
-        element.classList.add('scrolled');
-    };
-    
-    const hideScrollElement = (element) => {
-        element.classList.remove('scrolled');
-    };
-    
-    const handleScrollAnimation = () => {
-        scrollElements.forEach((el) => {
-            if (elementInView(el, 100)) {
-                displayScrollElement(el);
-            } else {
-                hideScrollElement(el);
+    if (!typedTextSpan || !cursorSpan) {
+        console.error('Typed text elements not found!');
+        console.log('typedTextSpan:', typedTextSpan);
+        console.log('cursorSpan:', cursorSpan);
+        return;
+    }
+
+    console.log('Animation elements found - Starting animation...');
+
+    const textArray = ['Game Designer', 'Narrative Designer', 'Level Designer', 'Mechanics Designer'];
+    const typingDelay = 100;
+    const erasingDelay = 50;
+    const newTextDelay = 2000;
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            cursorSpan.classList.add('typing');
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove('typing');
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            cursorSpan.classList.add('typing');
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove('typing');
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) {
+                textArrayIndex = 0;
             }
-        });
-    };
-    
-    // Add smooth scroll to all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+            setTimeout(type, typingDelay + 1100);
+        }
+    }
+
+    // Start the animation
+    setTimeout(type, 1000);
+});
+
+// ========== MENU TOGGLE ==========
+const menuIcon = document.querySelector('#menu-icon');
+const navbar = document.querySelector('.navbar');
+
+if (menuIcon && navbar) {
+    menuIcon.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+        menuIcon.classList.toggle('bx-x');
+    });
+}
+
+// ========== SMOOTH SCROLLING ==========
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href.startsWith('#')) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const target = document.querySelector(href);
             if (target) {
                 target.scrollIntoView({
-                    behavior: 'smooth'
+                    behavior: 'smooth',
+                    block: 'start'
                 });
+                // Close mobile menu if open
+                if (navbar && navbar.classList.contains('active')) {
+                    navbar.classList.remove('active');
+                    if (menuIcon) menuIcon.classList.remove('bx-x');
+                }
             }
-        });
+        }
     });
-    
-    // Lazy load images
-    if ('loading' in HTMLImageElement.prototype) {
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        images.forEach(img => {
-            img.src = img.dataset.src;
-        });
-    } else {
-        // Fallback for browsers that don't support lazy loading
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-        document.body.appendChild(script);
-    }
-    
-    // Event Listeners
-    window.addEventListener('scroll', () => {
-        handleScrollAnimation();
-    });
-    
-    // Initial check for elements in view
-    handleScrollAnimation();
 });
+
+// ========== SCROLL REVEAL EFFECT ==========
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (header) {
+        header.classList.toggle('sticky', window.scrollY > 100);
+    }
+});
+
+console.log('Main.js loaded successfully');
