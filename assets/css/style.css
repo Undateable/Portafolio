@@ -99,7 +99,7 @@ section {
   justify-content: space-between;
   gap: 8rem;
   background-color: rgba(138, 96, 59, 0.73);
-  min-height: 60vh;
+  min-height: 105vh;
   padding: 0 12%;
   position: relative;
   overflow: hidden;
