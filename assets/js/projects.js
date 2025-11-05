@@ -58,6 +58,20 @@ const projects = [
             "assets/img/transformice3.png",
         ],
     },
+    {
+        title: " Ruinas de Skersher ",
+        /* videoSrc: "assets/video/transformicevdo.mp4", */
+        genre: "acción y puzzles narrativos.",
+        engine: "Construct 2.",
+        role: "Designer, Artist and Developer.",
+        description:
+            "Designed the mechanics, levels and art approach.",
+        images: [
+            "assets/img/ruinas_1.png",
+            "assets/img/ruinas_2.png",
+            "assets/img/ruinas_3.png",
+        ],
+    },
 ];
 
 // =======================

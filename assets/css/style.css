@@ -357,16 +357,6 @@ section {
   transform: scale(1.1);
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 /* Ensure smooth animation */
 @media (prefers-reduced-motion: no-preference) {
   .logos {
@@ -396,15 +386,6 @@ section {
   }
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(-50% - 3rem));
-  }
-}
 
 /* Responsive adjustments for carousel */
 @media (max-width: 768px) {
@@ -1212,24 +1193,6 @@ section {
   color: var(--text-color);
 }
 
-.gameboy-dpad {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  margin: 2rem auto;
-  background: #20190F;
-  border-radius: 50%;
-  padding: 15px;
-  border: 2px solid var(--main-color);
-  box-shadow: 0 0 20px rgba(243, 228, 203, 0.3);
-  display: grid;
-  grid-template-areas:
-    ". up ."
-    "left center right"
-    ". down .";
-  gap: 5px;
-  z-index: 2;
-}
 
 .gameboy-dpad button {
   width: 40px;
@@ -1440,22 +1403,6 @@ justify-content: center;
   align-items: center;
 }
 
-.gameboy-dpad {
-  width: 120px;
-  height: 120px;
-  margin: 2rem auto;
-  position: relative;
-  z-index: 10;
-  background: #20190F;
-  border-radius: 50%;
-  padding: 10px;
-  border: 2px solid var(--main-color);
-  box-shadow: 0 0 15px rgba(243, 228, 203, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .slider {
   width: 100%;
   display: flex;
@@ -1491,21 +1438,6 @@ justify-content: center;
   height: auto;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
-}
-
-.gameboy-dpad {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  top: 95%;
-  left: -60px;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: #20190F;
-  border-radius: 50%;
-  padding: 10px;
-  border: 2px solid var(--main-color);
-  box-shadow: 0 0 15px rgba(243, 228, 203, 0.2);
 }
 
 .dpad-center {
@@ -1607,11 +1539,6 @@ justify-content: center;
 
 .gameboy-dpad:hover::before {
   opacity: 0.5;
-}
-
-.gameboy-dpad {
-  right: -60px;
-  /* Cambiado de left a right para el botón next */
 }
 
 .prev {
