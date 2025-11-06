@@ -4,7 +4,7 @@
 const projects = [
     {
         title: "🧟‍♀️ ​Ruinas de Skersher ",
-        /* videoSrc: "assets/video/transformicevdo.mp4", */
+        videoSrc: "assets/video/Ruinas.mp4", 
         genre: "Acción y Puzzles narrativos.",
         engine: "Unity / Google Drive.",
         role: "I served as the Game, Narrative and Level Designer.",
@@ -66,7 +66,7 @@ const projects = [
         description:
             "Designed the mechanics, levels and art approach.",
         images: [
-            "assets/img/transformice1.png",
+            "assets/img/transformice1png.png",
             "assets/img/transformice2.png",
             "assets/img/transformice3.png",
         ],
