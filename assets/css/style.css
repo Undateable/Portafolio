@@ -1374,9 +1374,6 @@ section {
 
 .slider-container {
   position: relative;
-  width: 90%;
-  max-width: 1200px;
-  margin: 2rem auto;
   overflow: visible;
   border-radius: 20px;
   background: rgba(146, 104, 68, 0.95);
@@ -1547,6 +1544,52 @@ section {
 
   .projects-section .heading {
     font-size: 5rem;
+  }
+
+  .slider-container {
+    padding: 1.5rem;
+    min-height: 300px;
+    border-radius: 15px;
+  }
+
+  .video-section {
+    font-size: 18px;
+    margin-right: 0;
+  }
+
+  .video-section video {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+  }
+
+  .video-section b {
+    font-size: 2.2rem;
+  }
+
+  .video-section p {
+    margin-top: 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  .images-section {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .gameboy-dpad {
+    width: 120px;
+    height: 120px;
+    margin: 1.5rem auto 3rem;
+  }
+
+  .gameboy-dpad button {
+    width: 35px;
+    height: 35px;
+  }
+
+  .gameboy-dpad button i {
+    font-size: 1.6rem;
   }
 }
 
@@ -1818,6 +1861,77 @@ section {
 @media (max-width: 480px) {
   .images-section {
     grid-template-columns: 1fr;
+  }
+
+  .slider-container {
+    padding: 1rem;
+    min-height: 250px;
+    border-radius: 10px;
+  }
+
+  .slide {
+    padding: 1rem;
+  }
+
+  .video-section {
+    font-size: 14px;
+  }
+
+  .video-section video {
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .video-section b {
+    font-size: 1.8rem;
+  }
+
+  .video-section pre,
+  .video-section p {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+  }
+
+  .images-section {
+    gap: 0.8rem;
+  }
+
+  .gameboy-dpad {
+    width: 100px;
+    height: 100px;
+    margin: 1rem auto 2rem;
+    padding: 10px;
+  }
+
+  .gameboy-dpad button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .gameboy-dpad button i {
+    font-size: 1.4rem;
+  }
+
+  .gameboy-dpad .dpad-center {
+    width: 15px;
+    height: 15px;
+  }
+
+  .nav {
+    width: 35px;
+    height: 35px;
+  }
+
+  .nav i {
+    font-size: 1.6rem;
+  }
+
+  .nav.prev {
+    left: 5px;
+  }
+
+  .nav.next {
+    right: 5px;
   }
 }
 
@@ -2430,6 +2544,19 @@ section {
     align-items: center;
     width: 100%;
   }
+
+  .slider-container {
+    padding: 0.8rem;
+    min-height: 200px;
+  }
+
+  .video-section video {
+    margin-bottom: 1rem;
+  }
+
+  .projects-section .heading {
+    font-size: 4rem;
+  }
 }
 
 @media (max-width:375px) {
@@ -2457,6 +2584,44 @@ section {
     color: var(--main-color);
     margin: 2rem 1rem;
     transition: 0.3s ease-in-out;
+  }
+
+  .slider-container {
+    padding: 0.5rem;
+    min-height: 180px;
+  }
+
+  .video-section b {
+    font-size: 1.6rem;
+  }
+
+  .video-section pre,
+  .video-section p {
+    font-size: 1.2rem;
+  }
+
+  .gameboy-dpad {
+    width: 90px;
+    height: 90px;
+    padding: 8px;
+  }
+
+  .gameboy-dpad button {
+    width: 25px;
+    height: 25px;
+  }
+
+  .gameboy-dpad button i {
+    font-size: 1.2rem;
+  }
+
+  .nav {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav i {
+    font-size: 1.4rem;
   }
 }
 
