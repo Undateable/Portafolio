@@ -1284,6 +1284,7 @@ section {
   transform-origin: left;
 }
 
+/* Legacy gameboy-dpad styles - Keeping for reference but not in use
 .gameboy-dpad {
   position: relative;
   width: 150px;
@@ -1304,6 +1305,7 @@ section {
   gap: 5px;
   z-index: 2;
 }
+*/
 
 .gameboy-dpad button {
   width: 40px;
@@ -1372,9 +1374,101 @@ section {
   pointer-events: none;
 }
 
+/* Projects Section Navigation */
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.slider-nav-btn {
+  width: 60px;
+  height: 60px;
+  background: rgba(243, 228, 203, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--main-color);
+  border-radius: 50%;
+  color: var(--main-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  flex-shrink: 0;
+  z-index: 3;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.slider-nav-btn i {
+  font-size: 2.8rem;
+  transition: transform 0.3s ease;
+}
+
+.slider-nav-btn:hover {
+  background: var(--main-color);
+  color: #20190F;
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(243, 228, 203, 0.4);
+}
+
+.slider-nav-btn:active {
+  transform: scale(0.95);
+}
+
+.slider-nav-btn:hover i {
+  transform: translateX(0);
+}
+
+.slider-nav-btn.prev-btn:hover i {
+  transform: translateX(-3px);
+}
+
+.slider-nav-btn.next-btn:hover i {
+  transform: translateX(3px);
+}
+
+.nav-tooltip {
+  position: absolute;
+  top: -40px;
+  background: var(--main-color);
+  color: #20190F;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.nav-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: var(--main-color) transparent transparent transparent;
+}
+
+.slider-nav-btn:hover .nav-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .slider-container {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   border-radius: 20px;
   background: rgba(146, 104, 68, 0.95);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
@@ -1383,6 +1477,67 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
+  border: 2px solid rgba(243, 228, 203, 0.2);
+  transition: all 0.3s ease;
+}
+
+.slider-container:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  border-color: rgba(243, 228, 203, 0.3);
+}
+
+/* Slider Indicators */
+.slider-indicators {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.slider-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(243, 228, 203, 0.3);
+  border: 2px solid var(--main-color);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.slider-indicator:hover {
+  background: rgba(243, 228, 203, 0.5);
+  transform: scale(1.2);
+}
+
+.slider-indicator.active {
+  background: var(--main-color);
+  transform: scale(1.3);
+  box-shadow: 0 0 15px rgba(243, 228, 203, 0.5);
+}
+
+.slider-indicator.active::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--main-color);
+  opacity: 0.5;
+  animation: pulse-indicator 2s infinite;
+}
+
+@keyframes pulse-indicator {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
 }
 
 .slider {
@@ -1546,6 +1701,19 @@ section {
     font-size: 5rem;
   }
 
+  .slider-wrapper {
+    gap: 1rem;
+  }
+
+  .slider-nav-btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .slider-nav-btn i {
+    font-size: 2.4rem;
+  }
+
   .slider-container {
     padding: 1.5rem;
     min-height: 300px;
@@ -1575,21 +1743,6 @@ section {
   .images-section {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-  }
-
-  .gameboy-dpad {
-    width: 120px;
-    height: 120px;
-    margin: 1.5rem auto 3rem;
-  }
-
-  .gameboy-dpad button {
-    width: 35px;
-    height: 35px;
-  }
-
-  .gameboy-dpad button i {
-    font-size: 1.6rem;
   }
 }
 
@@ -1863,10 +2016,27 @@ section {
     grid-template-columns: 1fr;
   }
 
+  /* Hide navigation buttons on mobile */
+  .slider-nav-btn {
+    display: none;
+  }
+
+  /* Show indicators on mobile */
+  .slider-indicators {
+    display: flex;
+  }
+
+  .slider-wrapper {
+    gap: 0;
+    flex-direction: column;
+  }
+
   .slider-container {
     padding: 1rem;
     min-height: 250px;
     border-radius: 10px;
+    width: 100%;
+    touch-action: pan-y pinch-zoom;
   }
 
   .slide {
@@ -1894,27 +2064,6 @@ section {
 
   .images-section {
     gap: 0.8rem;
-  }
-
-  .gameboy-dpad {
-    width: 100px;
-    height: 100px;
-    margin: 1rem auto 2rem;
-    padding: 10px;
-  }
-
-  .gameboy-dpad button {
-    width: 30px;
-    height: 30px;
-  }
-
-  .gameboy-dpad button i {
-    font-size: 1.4rem;
-  }
-
-  .gameboy-dpad .dpad-center {
-    width: 15px;
-    height: 15px;
   }
 
   .nav {
@@ -2545,9 +2694,26 @@ section {
     width: 100%;
   }
 
+  /* Hide navigation buttons on mobile */
+  .slider-nav-btn {
+    display: none;
+  }
+
+  /* Show indicators on mobile */
+  .slider-indicators {
+    display: flex;
+  }
+
+  .slider-wrapper {
+    flex-direction: column;
+    gap: 0;
+  }
+
   .slider-container {
     padding: 0.8rem;
     min-height: 200px;
+    width: 100%;
+    touch-action: pan-y pinch-zoom;
   }
 
   .video-section video {
@@ -2586,6 +2752,25 @@ section {
     transition: 0.3s ease-in-out;
   }
 
+  /* Hide navigation buttons on mobile */
+  .slider-nav-btn {
+    display: none;
+  }
+
+  /* Show indicators on mobile */
+  .slider-indicators {
+    display: flex;
+  }
+
+  .slider-wrapper {
+    gap: 0;
+  }
+
+  .slider-indicator {
+    width: 10px;
+    height: 10px;
+  }
+
   .slider-container {
     padding: 0.5rem;
     min-height: 180px;
@@ -2597,21 +2782,6 @@ section {
 
   .video-section pre,
   .video-section p {
-    font-size: 1.2rem;
-  }
-
-  .gameboy-dpad {
-    width: 90px;
-    height: 90px;
-    padding: 8px;
-  }
-
-  .gameboy-dpad button {
-    width: 25px;
-    height: 25px;
-  }
-
-  .gameboy-dpad button i {
     font-size: 1.2rem;
   }
 

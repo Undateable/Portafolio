@@ -277,18 +277,20 @@
         <h2 class="heading">
             My <span>Projects</span>
         </h2>
-        <div class="gameboy-dpad">
-            <button class="btn-left" id="prevBtn" aria-label="Previous project">
+        <div class="slider-wrapper">
+            <button class="slider-nav-btn prev-btn" id="prevBtn" aria-label="Previous project">
                 <i class='bx bx-chevron-left'></i>
+                <span class="nav-tooltip">Previous</span>
             </button>
-            <button class="btn-right" id="nextBtn" aria-label="Next project">
+            <div class="slider-container">
+                <div class="slider" id="slider"></div>
+            </div>
+            <button class="slider-nav-btn next-btn" id="nextBtn" aria-label="Next project">
                 <i class='bx bx-chevron-right'></i>
+                <span class="nav-tooltip">Next</span>
             </button>
-            <div class="dpad-center"></div>
         </div>
-        <div class="slider-container">
-            <div class="slider" id="slider"></div>
-        </div>
+        <div class="slider-indicators" id="sliderIndicators"></div>
     </section>
 
     <section class="mywork-section" id="mywork">

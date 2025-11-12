@@ -79,10 +79,86 @@ const projects = [
 document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
     const slider = document.getElementById("slider");
+    const indicatorsContainer = document.getElementById("sliderIndicators");
     
     if (!slider) {
         console.error('Slider element not found!');
         return;
+    }
+
+    // Touch/swipe handling
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const minSwipeDistance = 50;
+
+    function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+        
+        if (Math.abs(swipeDistance) > minSwipeDistance) {
+            if (swipeDistance > 0) {
+                // Swipe right - go to previous
+                navigateTo('prev');
+            } else {
+                // Swipe left - go to next
+                navigateTo('next');
+            }
+        }
+    }
+
+    slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    // Create indicators
+    function createIndicators() {
+        if (!indicatorsContainer) return;
+        
+        indicatorsContainer.innerHTML = '';
+        
+        projects.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.classList.add('slider-indicator');
+            if (index === currentIndex) {
+                indicator.classList.add('active');
+            }
+            
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                renderSlide();
+                updateIndicators();
+            });
+            
+            indicatorsContainer.appendChild(indicator);
+        });
+    }
+
+    // Update active indicator
+    function updateIndicators() {
+        if (!indicatorsContainer) return;
+        
+        const indicators = indicatorsContainer.querySelectorAll('.slider-indicator');
+        indicators.forEach((indicator, index) => {
+            if (index === currentIndex) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+
+    function navigateTo(direction) {
+        if (direction === 'prev') {
+            currentIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
+        } else {
+            currentIndex = currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
+        }
+        renderSlide();
+        updateIndicators();
     }
 
     function renderSlide() {
@@ -122,29 +198,28 @@ Role: ${p.role}
 
     if (prevBtn) {
         prevBtn.addEventListener("click", () => {
-            currentIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
-            renderSlide();
+            navigateTo('prev');
         });
     }
 
     if (nextBtn) {
         nextBtn.addEventListener("click", () => {
-            currentIndex = currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
-            renderSlide();
+            navigateTo('next');
         });
     }
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft' && prevBtn) {
-            prevBtn.click();
+            navigateTo('prev');
         } else if (e.key === 'ArrowRight' && nextBtn) {
-            nextBtn.click();
+            navigateTo('next');
         }
     });
 
-    // Initialize first slide
-    console.log('Initializing first slide');
+    // Initialize
+    console.log('Initializing slider');
+    createIndicators();
     renderSlide();
 });
 
