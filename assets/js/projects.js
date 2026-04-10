@@ -82,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const indicatorsContainer = document.getElementById("sliderIndicators");
     
     if (!slider) {
-        console.error('Slider element not found!');
         return;
     }
 
@@ -163,12 +162,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderSlide() {
         const p = projects[currentIndex];
-        console.log('Rendering slide:', currentIndex);
 
         slider.innerHTML = `
         <div class="slide">
             <div class="video-section">
-                <video controls autoplay muted>
+                <video controls autoplay muted playsinline preload="metadata">
                     <source src="${p.videoSrc}" type="video/mp4" />
                     Tu navegador no soporta video.
                 </video>
@@ -217,8 +215,6 @@ Role: ${p.role}
         }
     });
 
-    // Initialize
-    console.log('Initializing slider');
     createIndicators();
     renderSlide();
 });

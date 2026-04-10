@@ -1,17 +1,10 @@
-// ========== TYPED TEXT ANIMATION ==========
 document.addEventListener('DOMContentLoaded', function() {
     const typedTextSpan = document.querySelector('.typed-text');
     const cursorSpan = document.querySelector('.cursor');
-
-    if (!typedTextSpan || !cursorSpan) {
-        console.error('Typed text elements not found!');
-        console.log('typedTextSpan:', typedTextSpan);
-        console.log('cursorSpan:', cursorSpan);
-        return;
-    }
-
-    console.log('Animation elements found - Starting animation...');
-
+    const menuIcon = document.querySelector('#menu-icon');
+    const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const textArray = ['Game Designer', 'Narrative Designer', 'Level Designer', 'Mechanics Designer'];
     const typingDelay = 100;
     const erasingDelay = 50;
@@ -19,7 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let textArrayIndex = 0;
     let charIndex = 0;
 
+    function setMenuState(isOpen) {
+        if (!menuIcon || !navbar) {
+            return;
+        }
+
+        navbar.classList.toggle('active', isOpen);
+        menuIcon.classList.toggle('bx-x', isOpen);
+        menuIcon.classList.toggle('bx-menu', !isOpen);
+        menuIcon.setAttribute('aria-expanded', String(isOpen));
+    }
+
     function type() {
+        if (!typedTextSpan || !cursorSpan) {
+            return;
+        }
+
         if (charIndex < textArray[textArrayIndex].length) {
             cursorSpan.classList.add('typing');
             typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
@@ -32,6 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function erase() {
+        if (!typedTextSpan || !cursorSpan) {
+            return;
+        }
+
         if (charIndex > 0) {
             cursorSpan.classList.add('typing');
             typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
@@ -39,57 +51,80 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(erase, erasingDelay);
         } else {
             cursorSpan.classList.remove('typing');
-            textArrayIndex++;
-            if (textArrayIndex >= textArray.length) {
-                textArrayIndex = 0;
-            }
+            textArrayIndex = (textArrayIndex + 1) % textArray.length;
             setTimeout(type, typingDelay + 1100);
         }
     }
 
-    // Start the animation
-    setTimeout(type, 1000);
-});
+    function updateActiveSection() {
+        const scrollY = window.scrollY;
 
-// ========== MENU TOGGLE ==========
-const menuIcon = document.querySelector('#menu-icon');
-const navbar = document.querySelector('.navbar');
+        document.querySelectorAll('section[id]').forEach((section) => {
+            const offset = section.offsetTop - 180;
+            const height = section.offsetHeight;
+            const id = section.getAttribute('id');
 
-if (menuIcon && navbar) {
-    menuIcon.addEventListener('click', () => {
-        navbar.classList.toggle('active');
-        menuIcon.classList.toggle('bx-x');
-    });
-}
+            if (scrollY >= offset && scrollY < offset + height) {
+                navLinks.forEach((link) => link.classList.remove('active'));
 
-// ========== SMOOTH SCROLLING ==========
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && href.startsWith('#')) {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                // Close mobile menu if open
-                if (navbar && navbar.classList.contains('active')) {
-                    navbar.classList.remove('active');
-                    if (menuIcon) menuIcon.classList.remove('bx-x');
+                const activeLink = document.querySelector(`.nav-link[data-section="${id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
                 }
             }
+        });
+    }
+
+    if (menuIcon && navbar) {
+        menuIcon.setAttribute('aria-expanded', 'false');
+        menuIcon.setAttribute('aria-label', 'Toggle navigation menu');
+
+        menuIcon.addEventListener('click', () => {
+            setMenuState(!navbar.classList.contains('active'));
+        });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#') {
+                return;
+            }
+
+            const target = document.querySelector(href);
+            if (!target) {
+                return;
+            }
+
+            e.preventDefault();
+            target.scrollIntoView({
+                behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                block: 'start'
+            });
+            setMenuState(false);
+        });
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            setMenuState(false);
         }
     });
-});
 
-// ========== SCROLL REVEAL EFFECT ==========
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (header) {
-        header.classList.toggle('sticky', window.scrollY > 100);
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (header) {
+            header.classList.toggle('sticky', window.scrollY > 100);
+        }
+
+        updateActiveSection();
+    });
+
+    if (typedTextSpan && cursorSpan && !prefersReducedMotion) {
+        setTimeout(type, 1000);
+    } else if (typedTextSpan) {
+        typedTextSpan.textContent = textArray[0];
     }
-});
 
-console.log('Main.js loaded successfully');
+    updateActiveSection();
+});

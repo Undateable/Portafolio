@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
-
 * {
   margin: 0;
   padding: 0;
@@ -28,6 +26,14 @@ html {
   overflow-x: hidden;
   background-image: url(../img/backgroundaboutme.png);
   background-size: cover;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+section[id] {
+  scroll-margin-top: 12rem;
 }
 
 .header {
@@ -78,8 +84,15 @@ span img {
 
 .navbar a:hover,
 .navbar a.active {
-  color: var(#1E160E);
+  color: #1E160E;
   border-bottom: 3px solid #1E160E;
+}
+
+a:focus-visible,
+button:focus-visible,
+#menu-icon:focus-visible {
+  outline: 3px solid var(--main-color);
+  outline-offset: 4px;
 }
 
 #menu-icon {
@@ -279,7 +292,7 @@ section {
 .logos {
   display: flex;
   gap: 4rem;
-  animation: scroll 0.5s linear infinite;
+  animation: scroll var(--carousel-speed) linear infinite;
   padding: 2rem 0;
   will-change: transform;
   width: max-content;
@@ -583,8 +596,7 @@ section {
   flex: 0 0 auto;
   margin-left: 4rem;
   perspective: 1000px;
-  outline: 1px solid rgba(255, 255, 255, 0.1);
-  /* Outline temporal para debugging */
+  outline: none;
 }
 
 .img-frame {
@@ -654,6 +666,15 @@ section {
   transition: transform 0.5s ease;
   border: 4px solid #20190F;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.profile-img.loaded {
+  opacity: 1;
+}
+
+.profile-img.image-error {
+  border-color: #f44336;
+  background-color: rgba(244, 67, 54, 0.1);
 }
 
 .img-overlay {
@@ -1554,9 +1575,9 @@ section {
 }
 
 .video-section video {
-  width: 103%;
+  width: 100%;
   border-radius: 15px;
-  margin-bottom: 152px;
+  margin-bottom: 2rem;
 }
 
 .video-section p {

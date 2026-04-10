@@ -8,20 +8,22 @@
         content="Dante Pentito - Game and Narrative Designer Portfolio. Experienced in Unreal Engine and Unity with a background in IT.">
     <meta name="keywords" content="Game Design, Narrative Design, Unreal Engine, Unity, Game Development, Portfolio">
     <meta name="author" content="Dante Pentito">
+    <meta name="theme-color" content="#8a603b">
 
     <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
         script-src 'self' 'unsafe-inline';
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+        style-src 'self' https://fonts.googleapis.com https://unpkg.com;
         font-src 'self' https://fonts.gstatic.com https://unpkg.com;
-        img-src 'self' data: blob: https://unpkg.com;
+        img-src 'self' data:;
         media-src 'self';
         connect-src 'self';
         frame-src 'none';
         object-src 'none';
         base-uri 'self';
         form-action 'self';
+        upgrade-insecure-requests;
     ">
 
     <!-- Security Headers -->
@@ -30,18 +32,17 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
 
     <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Dante Pentito - Game Designer Portfolio">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dante Pentito - Game & Narrative Designer">
     <meta property="og:description"
-        content="Game and Narrative Designer with experience in Unreal Engine and Unity. View my latest projects and skills.">
-    <meta property="og:title" content="Dante Pentito - Portfolio">
-    <meta property="og:description"
-        content="Game and Narrative Designer with experience in Unreal Engine and Unity. View my latest projects and skills.">
-    <meta property="og:image" content="assets/img/logodp.png">
-    <meta property="og:url" content="https://yourwebsite.com">
+        content="Game and Narrative Designer with experience in Unreal Engine and Unity. Explore projects, design documents and skills.">
+    <meta property="og:image" content="https://undateable.github.io/Portafolio/assets/img/logodp.png">
+    <meta property="og:url" content="https://undateable.github.io/Portafolio/">
+
+    <link rel="canonical" href="https://undateable.github.io/Portafolio/">
 
     <!-- Preload critical assets -->
     <link rel="preload" as="image" href="assets/img/logodp.png">
-    <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" crossorigin>
 
     <!-- Favicon -->
     <link rel="icon" href="./assets/img/logodp.png" type="image/png">
@@ -52,8 +53,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' integrity="sha384-..." crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' crossorigin="anonymous">
 
     <title>Dante Pentito - Game & Narrative Designer</title>
 
@@ -73,7 +73,7 @@
         <nav class="navbar" id="navbar">
             <a href="#home" class="nav-link" data-section="home">Home</a>
 
-            <a href="https://dannette.itch.io" target="_blank" rel="noopener noreferrer">
+            <a href="#projects" class="nav-link" data-section="projects">
                 Projects
             </a>
 
@@ -447,7 +447,7 @@
 
     <footer class="footer">
         <div class="footer-text">
-            <p>© 2025 Dante Pentito | Todos los derechos reservados.</p>
+            <p>© 2026 Dante Pentito | All rights reserved.</p>
         </div>
 
         <div class="footer-iconTop">
