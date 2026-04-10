@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const root = document.documentElement;
     const typedTextSpan = document.querySelector('.typed-text');
     const cursorSpan = document.querySelector('.cursor');
     const menuIcon = document.querySelector('#menu-icon');
     const navbar = document.querySelector('.navbar');
     const navLinks = document.querySelectorAll('.nav-link');
+    const themeOptions = document.querySelectorAll('.theme-option');
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const textArray = ['Game Designer', 'Narrative Designer', 'Level Designer', 'Mechanics Designer'];
     const typingDelay = 100;
@@ -11,6 +14,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const newTextDelay = 2000;
     let textArrayIndex = 0;
     let charIndex = 0;
+
+    function applyTheme(view) {
+        const safeView = view === 'black' ? 'black' : 'white';
+
+        if (safeView === 'black') {
+            root.setAttribute('data-view', 'black');
+        } else {
+            root.removeAttribute('data-view');
+        }
+
+        if (themeColorMeta) {
+            themeColorMeta.setAttribute('content', safeView === 'black' ? '#050505' : '#8a603b');
+        }
+
+        themeOptions.forEach((button) => {
+            const isActive = button.dataset.view === safeView;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-pressed', String(isActive));
+        });
+    }
 
     function setMenuState(isOpen) {
         if (!menuIcon || !navbar) {
@@ -72,6 +95,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     activeLink.classList.add('active');
                 }
             }
+        });
+    }
+
+    if (themeOptions.length > 0) {
+        const savedView = localStorage.getItem('page-view') || 'white';
+        applyTheme(savedView);
+
+        themeOptions.forEach((button) => {
+            button.addEventListener('click', () => {
+                const nextView = button.dataset.view === 'black' ? 'black' : 'white';
+                applyTheme(nextView);
+                localStorage.setItem('page-view', nextView);
+            });
         });
     }
 
