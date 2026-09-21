@@ -5,6 +5,7 @@ const projects = [
     {
         title: "🧟‍♀️ ​Ruinas de Skersher ",
         videoSrc: "assets/video/Ruinas.mp4", 
+        captionsSrc: "assets/video/ruinas.vtt",
         genre: "Acción y Puzzles narrativos.",
         engine: "Unity / Google Drive.",
         role: "I served as the Game, Narrative and Level Designer.",
@@ -18,6 +19,7 @@ const projects = [
     {
         title: "🏃 Gaucho Runner",
         videoSrc: "assets/video/gauchrun.mp4",
+        captionsSrc: "assets/video/gauchrun.vtt",
         genre: "Endless Runner, FPS.",
         engine: "Unreal Engine 5.",
         role: "Designer.",
@@ -32,6 +34,7 @@ const projects = [
     {
         title: "🏆 The Nameless",
         videoSrc: "assets/video/thenameless.mp4",
+        captionsSrc: "assets/video/thenameless.vtt",
         genre: "3D first-person shooter with procedural dungeons.",
         engine: "Unreal Engine 5 Blueprints.",
         role: "Designer and Developer.",
@@ -46,6 +49,7 @@ const projects = [
     {
         title: "🎨 Box Boy (Game Jam – 48h Project)",
         videoSrc: "assets/video/boxboy.mp4",
+        captionsSrc: "assets/video/boxboy.vtt",
         genre: "3D puzzle platformer.",
         engine: "Unreal Engine 5 Blueprints.",
         role: "Narrative & Level Designer.",
@@ -60,6 +64,7 @@ const projects = [
     {
         title: "😼 Pawling's Inferno (2DVer.)",
         videoSrc: "assets/video/transformicevdo.mp4",
+        captionsSrc: "assets/video/transformice.vtt",
         genre: "Platformer.",
         engine: "Construct 2.",
         role: "Designer, Artist and Developer.",
@@ -117,11 +122,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function createIndicators() {
         if (!indicatorsContainer) return;
         
-        indicatorsContainer.innerHTML = '';
+        indicatorsContainer.replaceChildren();
         
         projects.forEach((_, index) => {
-            const indicator = document.createElement('div');
+            const indicator = document.createElement('button');
+            indicator.type = 'button';
             indicator.classList.add('slider-indicator');
+            indicator.setAttribute('aria-label', `Show project ${index + 1}: ${projects[index].title}`);
+            indicator.setAttribute('aria-current', String(index === currentIndex));
             if (index === currentIndex) {
                 indicator.classList.add('active');
             }
@@ -144,8 +152,10 @@ document.addEventListener('DOMContentLoaded', function() {
         indicators.forEach((indicator, index) => {
             if (index === currentIndex) {
                 indicator.classList.add('active');
+                indicator.setAttribute('aria-current', 'true');
             } else {
                 indicator.classList.remove('active');
+                indicator.setAttribute('aria-current', 'false');
             }
         });
     }
@@ -162,33 +172,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderSlide() {
         const p = projects[currentIndex];
+        const slide = document.createElement('div');
+        slide.className = 'slide';
 
-        slider.innerHTML = `
-        <div class="slide">
-            <div class="video-section">
-                <video controls autoplay muted playsinline preload="metadata">
-                    <source src="${p.videoSrc}" type="video/mp4" />
-                    Tu navegador no soporta video.
-                </video>
-                <b>${p.title}</b>
-                <pre>
-Genre: ${p.genre}
-Engine: ${p.engine}
-Role: ${p.role}
-                </pre>
-                <p>${p.description}</p>
-            </div>
+        const videoSection = document.createElement('div');
+        videoSection.className = 'video-section';
+        const video = document.createElement('video');
+        video.controls = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        const source = document.createElement('source');
+        source.src = p.videoSrc;
+        source.type = 'video/mp4';
+        video.appendChild(source);
+        const captions = document.createElement('track');
+        captions.kind = 'captions';
+        captions.src = p.captionsSrc;
+        captions.srclang = 'en';
+        captions.label = 'Project information';
+        video.appendChild(captions);
+        video.appendChild(document.createTextNode('Your browser does not support video.'));
+        videoSection.appendChild(video);
 
-            <div class="images-section">
-                ${p.images
-                    .map(
-                        (imgSrc, idx) =>
-                            `<img src="${imgSrc}" alt="Screenshot ${idx + 1} of ${p.title}" loading="lazy" />`
-                    )
-                    .join("")}
-            </div>
-        </div>
-        `;
+        const title = document.createElement('b');
+        title.textContent = p.title;
+        videoSection.appendChild(title);
+        const details = document.createElement('pre');
+        details.textContent = `Genre: ${p.genre}\nEngine: ${p.engine}\nRole: ${p.role}`;
+        videoSection.appendChild(details);
+        const description = document.createElement('p');
+        description.textContent = p.description;
+        videoSection.appendChild(description);
+
+        const imagesSection = document.createElement('div');
+        imagesSection.className = 'images-section';
+        p.images.forEach((imgSrc, index) => {
+            const image = document.createElement('img');
+            image.src = imgSrc;
+            image.alt = `${p.title} screenshot ${index + 1}`;
+            image.loading = 'lazy';
+            image.decoding = 'async';
+            imagesSection.appendChild(image);
+        });
+
+        slide.append(videoSection, imagesSection);
+        slider.replaceChildren(slide);
     }
 
     const prevBtn = document.getElementById("prevBtn");

@@ -41,8 +41,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         navbar.classList.toggle('active', isOpen);
-        menuIcon.classList.toggle('bx-x', isOpen);
-        menuIcon.classList.toggle('bx-menu', !isOpen);
+        const menuIconGlyph = menuIcon.querySelector('i');
+        if (menuIconGlyph) {
+            menuIconGlyph.classList.toggle('bx-x', isOpen);
+            menuIconGlyph.classList.toggle('bx-menu', !isOpen);
+        }
         menuIcon.setAttribute('aria-expanded', String(isOpen));
     }
 
@@ -99,21 +102,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (themeOptions.length > 0) {
-        const savedView = localStorage.getItem('page-view') || 'white';
+        let savedView = 'white';
+        try {
+            savedView = localStorage.getItem('page-view') || 'white';
+        } catch {
+            savedView = 'white';
+        }
         applyTheme(savedView);
 
         themeOptions.forEach((button) => {
             button.addEventListener('click', () => {
                 const nextView = button.dataset.view === 'black' ? 'black' : 'white';
                 applyTheme(nextView);
-                localStorage.setItem('page-view', nextView);
+                try {
+                    localStorage.setItem('page-view', nextView);
+                } catch {
+                    // The selected view still applies for the current page.
+                }
             });
         });
     }
 
     if (menuIcon && navbar) {
         menuIcon.setAttribute('aria-expanded', 'false');
-        menuIcon.setAttribute('aria-label', 'Toggle navigation menu');
 
         menuIcon.addEventListener('click', () => {
             setMenuState(!navbar.classList.contains('active'));

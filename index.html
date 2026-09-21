@@ -13,7 +13,7 @@
     <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
-        script-src 'self' 'unsafe-inline';
+        script-src 'self';
         style-src 'self' https://fonts.googleapis.com https://unpkg.com;
         font-src 'self' https://fonts.gstatic.com https://unpkg.com;
         img-src 'self' data:;
@@ -62,13 +62,31 @@
 <body>
 
     <header class="header">
-        <a href="#home" class="logo">
-            <span>
-                <img src="assets/img/logodp.png" alt="Logo Dante">
-            </span>
-        </a>
+        <div class="header-brand">
+            <a href="#home" class="logo">
+                <span>
+                    <img src="assets/img/logodp.png" alt="Logo Dante">
+                </span>
+            </a>
+        </div>
 
-        <i class="bx bx-menu" id="menu-icon"></i>
+        <div class="theme-switcher">
+            <div class="theme-switcher-controls" role="group" aria-label="Choose page view">
+                <button type="button" class="theme-option" data-view="white" aria-label="Light view"
+                    title="Light view" aria-pressed="false">
+                    <i class="bx bx-sun" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="theme-option" data-view="black" aria-label="Dark view"
+                    title="Dark view" aria-pressed="false">
+                    <i class="bx bx-moon" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <button type="button" class="menu-button" id="menu-icon" aria-label="Toggle navigation menu"
+            aria-controls="navbar" aria-expanded="false">
+            <i class="bx bx-menu" aria-hidden="true"></i>
+        </button>
 
         <nav class="navbar" id="navbar">
             <a href="#home" class="nav-link" data-section="home">Home</a>
@@ -87,17 +105,6 @@
                 Curriculum
             </a>
 
-            <div class="theme-switcher" aria-label="Page view selector">
-                <span class="theme-switcher-label">View</span>
-                <div class="theme-switcher-controls" role="group" aria-label="Choose page view">
-                    <button type="button" class="theme-option" data-view="white" aria-pressed="false">
-                        White
-                    </button>
-                    <button type="button" class="theme-option" data-view="black" aria-pressed="false">
-                        Black
-                    </button>
-                </div>
-            </div>
         </nav>
     </header>
 
@@ -154,8 +161,8 @@
 
         <div class="home-img">
             <div class="img-wrapper">
-                <img src="assets/img/image.jpg" alt="Dante Pentito - Game Designer" 
-                     id="profile-image" class="profile-img">
+                 <img src="assets/img/image.jpg" alt="Dante Pentito - Game Designer" 
+                     id="profile-image" class="profile-img" decoding="async" fetchpriority="high">
                 <div class="img-overlay"></div>
                 <!-- Decorative elements -->
                 <div class="img-frame"></div>
@@ -176,11 +183,11 @@
             <div class="logos">
                 <!-- Primary Set -->
                 <div class="tech-icon" title="Unreal Engine">
-                    <i class='bx bxl-unity'></i>
+                    <i class='bx bx-cube'></i>
                     <span>Unreal Engine</span>
                 </div>
                 <div class="tech-icon" title="Unity">
-                    <i class='bx bxl-unity'></i>
+                    <i class='bx bx-cube'></i>
                     <span>Unity</span>
                 </div>
                 <div class="tech-icon" title="GitHub">
@@ -230,7 +237,7 @@
 
                 <!-- First Duplicate Set -->
                 <div class="tech-icon" title="Unreal Engine">
-                    <i class='bx bxl-unity'></i>
+                    <i class='bx bx-cube'></i>
                     <span>Unreal Engine</span>
                 </div>
                 <div class="tech-icon" title="Unity">
@@ -379,11 +386,11 @@
                 <h3>Game Engines & Tools</h3>
                 <div class="skill-icons">
                     <div class="skill-icon" data-skill="Unreal Engine">
-                        <i class='bx bxl-unity'></i>
+                        <i class='bx bx-cube'></i>
                         <span class="skill-name">Unreal Engine</span>
                     </div>
                     <div class="skill-icon" data-skill="Unity">
-                        <i class='bx bxl-unity'></i>
+                        <i class='bx bx-cube'></i>
                         <span class="skill-name">Unity</span>
                     </div>
                     <div class="skill-icon" data-skill="GitHub">
@@ -487,7 +494,6 @@
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/projects.js"></script>
-    <script src="assets/js/imageDebug.js"></script>
     <!-- Mover el JSON-LD inline a archivo externo -->
     <script src="assets/js/schema.js"></script>
 </body>
